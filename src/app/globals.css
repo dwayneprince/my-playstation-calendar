@@ -1,0 +1,106 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+.dates-grid {
+
+}
+
+.dates-grid {
+}
+
+.week-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.date-cell {
+  box-shadow: 0px 2px 5px -2px rgba(0, 0, 0, 0.2);
+  flex: 1 0 calc(90% / 7 - 2px);
+  margin: 5px;
+  position: relative;
+}
+
+.date-cell:after {
+  content: '';
+  display: block;
+  margin-top: 100%;
+}
+
+.date-number {
+  align-items: center;
+  border-radius: 100%;
+  display: flex;
+  font-family: system-ui, 'Segoe UI', 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  height: 24px;
+  justify-content: center;
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  width: 24px;
+}
+
+.event-day {
+  cursor: pointer;
+}
+
+.event-day .date-number {
+  background: #2b67b7;
+  color: #fff;
+  z-index: 1;
+}
+
+.events {
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.event {
+  height: 100%;
+  width: 100%;
+}
+
+.event .poster {
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+
+.empty {
+  box-shadow: none;
+}
