@@ -1,6 +1,18 @@
-import React from "react";
+import React, { FC } from "react";
 
-const Header = ({ monthName, year, goToPreviousMonth, goToNextMonth }) => {
+interface HeaderProps {
+  monthName: string;
+  year: number;
+  goToPreviousMonth: () => void;
+  goToNextMonth: () => void;
+}
+
+const Header: FC<HeaderProps> = ({
+  monthName,
+  year,
+  goToPreviousMonth,
+  goToNextMonth,
+}) => {
   return (
     <div className=" flex items-center justify-between p-4 ">
       <button

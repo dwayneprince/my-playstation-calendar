@@ -1,7 +1,23 @@
 import React from "react";
 import Image from "next/image";
 
-const Event = ({ event }) => {
+interface Event {
+  id: string;
+  imageFilenameFull: string;
+  title: string;
+  summary: string;
+}
+
+interface EventProps {
+  event: {
+    id: string;
+    imageFilenameFull: string;
+    title: string;
+    summary: string;
+  };
+}
+
+const Event: React.FC<EventProps> = ({ event }) => {
   const imageSrc = `/assets/${event.imageFilenameFull}.webp`;
 
   return (

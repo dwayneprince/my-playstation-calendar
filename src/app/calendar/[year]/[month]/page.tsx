@@ -10,41 +10,35 @@ import Event from "@/components/Event";
 
 const Calendar = () => {
   const router = useRouter();
-  const [events, setEvents] = useState([]);
+  const [events, setEvents] = useState<any[]>([]);
   const [expandedEventId, setExpandedEventId] = useState(null);
   const { year, month } = useParams();
 
-  // Convert string params to numbers
-  const yearNum = parseInt(year, 10);
-  const monthNum = parseInt(month, 10);
+  const yearNum = parseInt(year as string, 10);
+  const monthNum = parseInt(month as string, 10);
 
-  // Validate year and month
-  const isValidMonth = month >= 1 && month <= 12;
-  const isValidYear = year >= 1;
+  const isValidMonth = monthNum >= 1 && monthNum <= 12;
+  const isValidYear = yearNum >= 1;
   const isDateValid = isValidMonth && isValidYear;
 
   useEffect(() => {
     if (!isDateValid) {
-      // Current year and month
       const currentDate = new Date();
       const currentYear = currentDate.getFullYear();
       const currentMonth = currentDate.getMonth() + 1;
 
-      // Redirecting to current year and month
       router.push(`/calendar/${currentYear}/${currentMonth}`);
     } else {
-      // Fetching events if the date is valid
       const getEvents = async () => {
         const eventsData = await fetchEvents();
-        setEvents(eventsData);
+        setEvents(eventsData as any[]);
       };
 
       getEvents();
     }
   }, [year, month, isDateValid, router]);
 
-  // Generate the days in the month
-  const generateCalendarDays = (year, month) => {
+  const generateCalendarDays = (year: number, month: number): Date[] => {
     const date = new Date(year, month - 1, 1);
     const days = [];
     while (date.getMonth() === month - 1) {
@@ -54,7 +48,7 @@ const Calendar = () => {
     return days;
   };
 
-  const getEventsOnDate = (date) => {
+  const getEventsOnDate = (date: Date) => {
     return events?.filter((event) => {
       const eventDate = new Date(event.launchDate);
       return (
@@ -65,11 +59,9 @@ const Calendar = () => {
     });
   };
 
-  // Generate the days for the current month
-  const calendarDays = generateCalendarDays(year, month);
+  const calendarDays = generateCalendarDays(yearNum, monthNum);
 
-  // Get the first day of the month
-  const firstDayOfMonth = new Date(year, month - 1, 1).getDay();
+  const firstDayOfMonth = new Date(yearNum, monthNum - 1, 1).getDay();
 
   const goToPreviousMonth = () => {
     const newYear = monthNum === 1 ? yearNum - 1 : yearNum;

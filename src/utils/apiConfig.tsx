@@ -13,7 +13,6 @@ export const fetchEvents = async () => {
       "Could not fetch events, please update API path in apiConfig.js. using sample data for now: ",
       error
     );
-    // return sampleData;
 
     try {
       const response = await fetch("/data/events.json");

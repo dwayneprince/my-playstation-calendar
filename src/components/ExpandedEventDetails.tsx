@@ -6,7 +6,19 @@ const Spinner = () => (
   <div className="w-full h-2 bg-transparent relative overflow-hidden before:content-'' before:absolute before:left-1/2 before:top-0 before:h-2 before:bg-blue-500 before:animate-growSpinner"></div>
 );
 
-const ExpandedEventDetails = ({ event }) => {
+interface EventProps {
+  event: {
+    id: string;
+    imageFilenameFull: string;
+    title: string;
+    summary: string;
+    launchDate: string;
+    learnMoreLink: string;
+    purchaseLink: string;
+  };
+}
+
+const ExpandedEventDetails: React.FC<EventProps> = ({ event }) => {
   const [isLoading, setIsLoading] = useState(true);
   const imageSrc = `/assets/${event.imageFilenameFull}.webp`;
 
