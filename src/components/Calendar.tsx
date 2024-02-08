@@ -1,9 +1,5 @@
-// components/Calendar.tsx
-import React from 'react';
-import Event from './Event';
-
-
-
+import React from "react";
+import Event from "./Event";
 
 interface CalendarProps {
   events: Event[];
@@ -12,7 +8,6 @@ interface CalendarProps {
 const Calendar: React.FC<CalendarProps> = ({ events }) => {
   return (
     <div>
-      {/* Render Calendar Grid */}
       {events.map((event) => (
         <Event key={event.id} event={event} />
       ))}

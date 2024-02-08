@@ -1,6 +1,5 @@
-// components/EventDetails.tsx
-import React from 'react';
-import { Event as EventType } from '../types';
+import React from "react";
+import { Event as EventType } from "../types";
 
 interface EventDetailsProps {
   event: EventType;
@@ -12,7 +11,6 @@ const EventDetails: React.FC<EventDetailsProps> = ({ event }) => {
       <h2>{event.title}</h2>
       <p>{event.description}</p>
       <img src={event.image} alt={event.title} />
-      {/* Add more details as needed */}
     </div>
   );
 };

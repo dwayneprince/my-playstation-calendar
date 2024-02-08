@@ -9,17 +9,14 @@ export const fetchEvents = async () => {
     const data = await response.json();
     return data;
   } catch (error) {
-    console.error(
-      "Could not fetch events, please update API path in apiConfig.js. using sample data for now: ",
-      error
-    );
+    console.log("🚀 ~ file: apiConfig.tsx:12 ~ fetchEvents ~ error:", error);
 
     try {
       const response = await fetch("/data/events.json");
       const data = await response.json();
       return data;
     } catch (error) {
-      console.error("Error fetching JSON:", error);
+      console.log("🚀 ~ file: apiConfig.tsx:19 ~ fetchEvents ~ error:", error);
     }
   }
 };

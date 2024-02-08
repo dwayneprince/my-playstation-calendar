@@ -1,10 +1,10 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { weekNames, monthNames } from "../../../../utils/strings";
+import { weekNames, monthNames } from "../../../utils/strings";
 
-import { fetchEvents } from "../../../../utils/apiConfig";
-import Header from "../../../../components/Header";
-import ExpandedEventDetails from "../../../../components/ExpandedEventDetails";
+import { fetchEvents } from "../../../utils/apiConfig";
+import Header from "../../../components/Header";
+import ExpandedEventDetails from "../../../components/ExpandedEventDetails";
 import { useParams, useRouter } from "next/navigation";
 import Event from "@/components/Event";
 
@@ -27,7 +27,7 @@ const Calendar = () => {
       const currentYear = currentDate.getFullYear();
       const currentMonth = currentDate.getMonth() + 1;
 
-      router.push(`/calendar/${currentYear}/${currentMonth}`);
+      router.push(`/${currentYear}/${currentMonth}`);
     } else {
       const getEvents = async () => {
         const eventsData = await fetchEvents();
@@ -66,13 +66,13 @@ const Calendar = () => {
   const goToPreviousMonth = () => {
     const newYear = monthNum === 1 ? yearNum - 1 : yearNum;
     const newMonth = monthNum === 1 ? 12 : monthNum - 1;
-    router.push(`/calendar/${newYear}/${newMonth}`);
+    router.push(`/${newYear}/${newMonth}`);
   };
 
   const goToNextMonth = () => {
     const newYear = monthNum === 12 ? yearNum + 1 : yearNum;
     const newMonth = monthNum === 12 ? 1 : monthNum + 1;
-    router.push(`/calendar/${newYear}/${newMonth}`);
+    router.push(`/${newYear}/${newMonth}`);
   };
 
   const renderWeeks = () => {
@@ -150,7 +150,7 @@ const Calendar = () => {
   };
 
   return (
-    <div className="p-3 ">
+    <div className="mx-auto max-w-[900px] ">
       <Header
         monthName={monthNames[monthNum - 1]}
         year={yearNum}
