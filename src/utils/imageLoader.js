@@ -1,3 +1,5 @@
+
+
 const imageLoader = (imageContext, filename) => {
     try {
       return imageContext(`./${filename}.webp`);
@@ -10,6 +12,5 @@ const imageLoader = (imageContext, filename) => {
       }
     }
   };
-  
+
   export default imageLoader;
-  

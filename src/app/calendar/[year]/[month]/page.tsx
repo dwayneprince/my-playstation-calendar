@@ -9,7 +9,7 @@ import { useParams, useRouter } from "next/navigation";
 import Event from "@/components/Event";
 
 const Calendar = () => {
-  const navigate = useRouter;
+  const router = useRouter();
   const [events, setEvents] = useState([]);
   const [expandedEventId, setExpandedEventId] = useState(null);
   const { year, month } = useParams();
@@ -31,7 +31,7 @@ const Calendar = () => {
       const currentMonth = currentDate.getMonth() + 1;
 
       // Redirecting to current year and month
-      navigate(`${process.env.PUBLIC_URL}/${currentYear}/${currentMonth}`);
+      router.push(`/calendar/${currentYear}/${currentMonth}`);
     } else {
       // Fetching events if the date is valid
       const getEvents = async () => {
@@ -41,7 +41,7 @@ const Calendar = () => {
 
       getEvents();
     }
-  }, [year, month, isDateValid, navigate]);
+  }, [year, month, isDateValid, router]);
 
   // Generate the days in the month
   const generateCalendarDays = (year, month) => {
@@ -74,13 +74,13 @@ const Calendar = () => {
   const goToPreviousMonth = () => {
     const newYear = monthNum === 1 ? yearNum - 1 : yearNum;
     const newMonth = monthNum === 1 ? 12 : monthNum - 1;
-    navigate(`${process.env.PUBLIC_URL}/${newYear}/${newMonth}`);
+    router.push(`/calendar/${newYear}/${newMonth}`);
   };
 
   const goToNextMonth = () => {
     const newYear = monthNum === 12 ? yearNum + 1 : yearNum;
     const newMonth = monthNum === 12 ? 1 : monthNum + 1;
-    // navigate(`${process.env.PUBLIC_URL}/${newYear}/${newMonth}`);
+    router.push(`/calendar/${newYear}/${newMonth}`);
   };
 
   const renderWeeks = () => {
@@ -134,7 +134,7 @@ const Calendar = () => {
       // Check if the week is complete, or if we're at the end of the calendar cells
       if ((cell + 1) % 7 === 0 || cell === totalCells - 1) {
         weeks.push(
-          <div key={`week-${weeks.length}`} className="week-row">
+          <div key={`week-${weeks.length}`} className="flex justify-between ">
             {weekDays}
           </div>
         );
@@ -158,7 +158,7 @@ const Calendar = () => {
   };
 
   return (
-    <div className=" ">
+    <div className="p-3 ">
       <Header
         monthName={monthNames[monthNum - 1]}
         year={yearNum}
@@ -169,13 +169,13 @@ const Calendar = () => {
         {weekNames.map((day) => (
           <div
             key={day}
-            className={`border-t border-gray-300 flex-1 font-mono text-center p-10`}
+            className={`py-5 flex items-center border-t justify-center border-gray-300  font-mono text-xs md:text-base`}
           >
             {day}
           </div>
         ))}
       </div>
-      <div className="dates-grid ">{renderWeeks()}</div>
+      <div className=" ">{renderWeeks()}</div>
     </div>
   );
 };
